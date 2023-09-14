@@ -31,18 +31,34 @@ if (isset($_POST['lgn'])) {
             // $_SESSION['id'] = $cek['id_admin'];
             header("location: resepsionis.php");
         }
+    } else {
+        header("?msg=username atau password salah");
     }
 }
 
-
+if (isset($_GET['msg'])) {
+    $dulu = $_GET['msg'];
+    echo "<script>
+            alert('$dulu');
+            window.location.href='login.php';
+        </script>";
+}
 ?>
 
 
-<form action="" method="post">
-    <label for="">username</label>
-    <input type="text" name="user">
-    <label for="">password</label>
-    <input type="password" name="pass">
-    <button name="lgn">login</button>
-</form>
-<a href="regis.php">registrasi</a>
+<head>
+    <link rel="stylesheet" href="output.css">
+</head>
+<div class="bungkus h-screen flex justify-center">
+    <form action="" method="post" class='m-auto flex justify-center flex-col w-1/3 p-5 shadow-2xl border-4 overflow-hidden rounded-lg capitalize gap-5 '>
+        <label for="">username</label>
+        <input type="text" name="user" class='rounded h-10 border-2 p-2'>
+        <label for="">password</label>
+        <input type="password" name="pass" class='rounded h-10 border-2 p-2'>
+        <button name="lgn" class='capitalize bg-black text-white p-2 rounded hover:bg-slate-700 transition duration-500'>login</button>
+        <div class="flex justify-between">
+            <a href="regis.php" class='p-2 hover:bg-black hover:text-white transition duration-500 rounded'>registrasi</a>
+            <a href="index.php" class='p-2 hover:bg-black hover:text-white transition duration-500 rounded'>Halaman Utama</a>
+        </div>
+    </form>
+</div>

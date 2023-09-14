@@ -19,6 +19,13 @@ if (isset($_POST['pesann'])) {
         </script>
     ";
 }
+if (isset($_GET['msg'])) {
+    $dulu = $_GET['msg'];
+    echo "<script>
+            alert('$dulu');
+            window.location.href='index.php';
+        </script>";
+}
 
 ?>
 
@@ -26,22 +33,32 @@ if (isset($_POST['pesann'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="output.css">
+    <style>
+        * {
+            scroll-behavior: smooth;
+            scroll-padding: 75px;
+        }
+    </style>
 </head>
 
 
 <div class="md:text-xl text-xs w-full flex p-5 bg-sky-900 capitalize gap-5 justify-around text-white font-bold tracking-[.25rem]">
     <a href="">hothel</a>
-    <a href="login.php">login</a>
-    <a href="logout.php">logout</a>
-    <a href="pesananuser.php">pesanan</a>
+    <a href="#kmr">kamar</a>
+    <?php if(!isset($_SESSION['logg'])) { ?>
+        <a href="login.php">login</a>
+    <?php } ?>
+    <?php if(isset($_SESSION['logg'])) { ?>
+        <a href="logout.php">logout</a>
+        <a href="pesananuser.php">pesanan</a>
+    <?php } ?>
 </div>
 
 <h1 class="font-mono text-center p-5 text-[25px]">Fasilitas Hotel</h1>
-<div class="fasil flex gap-5 overflow-x-auto">
+<div class="fasil flex gap-5 overflow-x-auto justify-between px-5">
     <?php foreach (mysqli_query($conn, "select * from fasilitas_hotel") as $fas) : ?>
-        <div class="card flex-shrink-0 flex relative mx-5 rounded-md overflow-hidden group">
+        <div class="card flex-shrink-0 flex relative rounded-md overflow-hidden group">
             <img src="img/<?= $fas['gambar'] ?>" alt="" class=" w-full h-64 group-hover:blur-sm transition duration-[1s]">
             <div class="text-3xl text-white capitalize bg-opacity-50 bg-slate-500 transition duration-[0.5s] translate-y-full group-hover:translate-y-0 absolute m-auto inset-0 flex flex-col text justify-center items-center ">
                 <h1 class="font-bold"><?= $fas['nama'] ?></h1>
@@ -53,7 +70,7 @@ if (isset($_POST['pesann'])) {
 
 <h1 class="text-center text-[25px] font-mono p-5">Kamar</h1>
 
-<div class="cont p-5 flex flex-wrap gap-20 box-border justify-center">
+<div id='kmr' class="cont p-5 flex flex-wrap gap-20 box-border justify-center">
     <?php foreach ($kamar as $kmr) :
         $tipe = $kmr['tipe_kamar'];
         $idkmr = $kmr['id_kamar'];
@@ -75,14 +92,14 @@ if (isset($_POST['pesann'])) {
                 </form>
             <?php } else if (isset($_SESSION['logg']) and mysqli_num_rows(mysqli_query($conn, "select * from reservasi where id_user = $idd and tipe_kamar = '$tipe' "))) { ?>
                 <form action="" method="post" class="m-0">
-                    <button name="pesann">pesan</button>
+                    <button name="pesann" class="p-2 bottom-0 w-full capitalize bg-black text-white text-xs duration-200 hover:bg-slate-700">pesan</button>
                 </form>
             <?php } else { ?>
-                <form action="pesan.php" method="get">
+                <form action="pesan.php" method="get" class='m-0'>
                     <input type="hidden" name="tipe" value="<?= $kmr['tipe_kamar'] ?>">
                     <input type="hidden" name="fasil" value="<?= $fas['fasilitas'] ?>">
                     <input type="hidden" name="id" value="<?= $kmr['id_kamar'] ?>">
-                    <button name="pesan" class="m-0">pesan</button>
+                    <button name="pesan" class="p-2 bottom-0 w-full capitalize bg-black text-white text-xs duration-200 hover:bg-slate-700">pesan</button>
                 </form>
         <?php }
                 endforeach; ?>

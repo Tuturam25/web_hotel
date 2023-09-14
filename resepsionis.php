@@ -71,26 +71,27 @@ if (isset($_POST['cetak'])) {
             }
         }
     </style>
+    <link rel="stylesheet" href="output.css">
 </head>
 
 <body>
     <div class="cont">
-        <h1>Data Reservasi</h1>
-        <a href="logout.php">logout</a>
-        <form action="" method="post">
-            <input type="date" name="date">
-            <input type="text" name="name">
-            <button name="cari">cari</button>
+        <h1 class='text-center p-5 text-3xl font-bold'>Data Reservasi</h1>
+        <form action="" method="post" class='capitalize flex px-5 gap-3 items-center'>
+            <input type="date" name="date" class='border-2 p-2 border-black rounded'>
+            <input type="text" name="name" class='border-2 p-2 border-black rounded'>
+            <button name="cari" class='capitalize p-2 rounded bg-black hover:bg-slate-800 text-white'>cari</button>
+            <a href="logout.php" class='ms-auto capitalize p-2 rounded bg-black hover:bg-slate-800 text-white'>logout</a>
         </form>
-        <table>
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Check-in</th>
-                <th>Check-out</th>
-                <th>Tipe Kamar</th>
-                <th>Jumlah Kamar</th>
-                <th>Aksi</th>
+        <table class='w-full text-center border-2 border-collapse'>
+            <tr class='p-5 border-2 border-collapse'>
+                <th class='p-5 border-2 border-collapse'>No</th>
+                <th class='p-5 border-2 border-collapse'>Nama</th>
+                <th class='p-5 border-2 border-collapse'>Check-in</th>
+                <th class='p-5 border-2 border-collapse'>Check-out</th>
+                <th class='p-5 border-2 border-collapse'>Tipe Kamar</th>
+                <th class='p-5 border-2 border-collapse'>Jumlah Kamar</th>
+                <th class='p-5 border-2 border-collapse'>Aksi</th>
             </tr>
             <?php if (isset($_POST['cari'])) :
                 $cekin = $_POST['date'];
@@ -103,14 +104,14 @@ if (isset($_POST['cetak'])) {
                     $ress = mysqli_query($conn, "select * from reservasi where cek_in = '$cekin' and nama = '$nama'");
                 }
                 foreach ($ress as $res) : ?>
-                    <tr>
-                        <td><?= $no++ ?></td>
-                        <td><?= $res['nama'] ?></td>
-                        <td><?= $res['cek_in'] ?></td>
-                        <td><?= $res['cek_out'] ?></td>
-                        <td><?= $res['tipe_kamar'] ?></td>
-                        <td><?= $res['jumlah_kamar'] ?></td>
-                        <td class="aksi">
+                    <tr class='p-5 border-2 border-collapse'>
+                        <td class='p-5 border-2 border-collapse'><?= $no++ ?></td>
+                        <td class='p-5 border-2 border-collapse'><?= $res['nama'] ?></td>
+                        <td class='p-5 border-2 border-collapse'><?= $res['cek_in'] ?></td>
+                        <td class='p-5 border-2 border-collapse'><?= $res['cek_out'] ?></td>
+                        <td class='p-5 border-2 border-collapse'><?= $res['tipe_kamar'] ?></td>
+                        <td class='p-5 border-2 border-collapse'><?= $res['jumlah_kamar'] ?></td>
+                        <td class="aksi p-5 border-2 border-collapse">
                             <?php if ($res['status'] == 0) : ?>
                                 <form action="" method="post">
                                     <input type="hidden" name="sts" value="1">
@@ -138,18 +139,18 @@ if (isset($_POST['cetak'])) {
             else : ?>
                 <?php foreach (mysqli_query($conn, "select * from reservasi") as $res) : ?>
                     <tr>
-                        <td><?= $no++ ?></td>
-                        <td><?= $res['nama'] ?></td>
-                        <td><?= $res['cek_in'] ?></td>
-                        <td><?= $res['cek_out'] ?></td>
-                        <td><?= $res['tipe_kamar'] ?></td>
-                        <td><?= $res['jumlah_kamar'] ?></td>
-                        <td>
+                        <td class='p-5 border-2 border-collapse'><?= $no++ ?></td>
+                        <td class='p-5 border-2 border-collapse'><?= $res['nama'] ?></td>
+                        <td class='p-5 border-2 border-collapse'><?= $res['cek_in'] ?></td>
+                        <td class='p-5 border-2 border-collapse'><?= $res['cek_out'] ?></td>
+                        <td class='p-5 border-2 border-collapse'><?= $res['tipe_kamar'] ?></td>
+                        <td class='p-5 border-2 border-collapse'><?= $res['jumlah_kamar'] ?></td>
+                        <td class='p-5 border-2 border-collapse'>
                             <?php if ($res['status'] == 0) : ?>
                                 <form action="" method="post">
                                     <input type="hidden" name="sts" value="1">
                                     <input type="hidden" name="id" value="<?= $res['id_reservasi'] ?>">
-                                    <button name="konfir">konfirmasi</button>
+                                    <button name="konfir" class='capitalize p-2 hover:bg-black hover:text-white transition duration-500 rounded'>konfirmasi</button>
                                 </form>
                             <?php endif ?>
                             <?php if ($res['status'] == 1) : ?>
@@ -157,13 +158,13 @@ if (isset($_POST['cetak'])) {
                                     <input type="hidden" name="sts" value="0">
                                     <input type="hidden" name="id" value="<?= $res['id_reservasi'] ?>">
                                     <input type="hidden" name="cek" value="2">
-                                    <button name="btl">batal</button>
-                                    <button name="cekout">cekout</button>
+                                    <button name="btl" class='p-2 capitalize hover:bg-red-900 hover:text-white transition duration-500 rounded'>batal</button>
+                                    <button name="cekout" class='p-2 capitalize hover:bg-blue-950 hover:text-white transition duration-500 rounded'>cekout</button>
                                 </form>
                             <?php endif ?>
                             <?php if ($res['status'] == 2) : ?>
                                 <form action="" method="post">
-                                    <button disabled>sudah cek out</button>
+                                    <button disabled class='p-2 bg-blue-950 text-white capitalize rounded'>sudah cek out</button>
                                 </form>
                             <?php endif ?>
                         </td>
@@ -172,7 +173,7 @@ if (isset($_POST['cetak'])) {
             endif; ?>
         </table>
         <form action="" method="post">
-            <button name="cetak">cetak</button>
+            <button name="cetak" class='p-2 bg-black hover:bg-slate-700 text-white capitalize transition duration-500 rounded'>cetak</button>
         </form>
     </div>
 </body>

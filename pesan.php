@@ -17,20 +17,27 @@ if (isset($_POST['psn'])) {
 
 ?>
 
-<form action="" method="post">
-    <label for="">No kamar</label>
-    <input type="text" disabled value="<?= $_GET['id'] ?>">
-    <label for="">Tipe kamar</label>
-    <input type="text" disabled value="<?= $_GET['tipe'] ?>">
-    <label for="">fasilitas kamar</label>
-    <input type="text" disabled value="<?= $_GET['fasil'] ?>">
-    <label for="">check-in</label>
-    <input type="date" name="cekin">
-    <label for="">check-out</label>
-    <input type="date" name="cekout">
-    <label for="">jumlah kamar</label>
-    <input type="number" name="jumlah">
-    <label for="">atas nama</label>
-    <input type="text" name="nama">
-    <button name="psn">buat pesanan</button>
-</form>
+<head>
+    <link rel="stylesheet" href="output.css">
+</head>
+
+<a href="index.php" class=' text-9xl fixed p-0 -translate-y-5'>&larr;</a>
+<div class="wrap h-screen flex justify-center ">
+    <form action="" method="post" class='m-auto flex justify-center flex-col w-1/3 p-5 shadow-2xl border-4 overflow-hidden rounded-lg capitalize gap-5 '>
+        <label for="">No kamar</label>
+        <input type="text" disabled value="<?= $_GET['id'] ?>" class='rounded h-10 border-2 p-2'>
+        <label for="">Tipe kamar</label>
+        <input type="text" disabled value="<?= $_GET['tipe'] ?>" class='rounded h-10 border-2 p-2'>
+        <label for="">fasilitas kamar</label>
+        <input type="text" disabled value="<?= $_GET['fasil'] ?>" class='rounded h-10 border-2 p-2'>
+        <label for="">check-in</label>
+        <input type="date" name="cekin" class='rounded h-10 border-2 p-2 border-slate-500'>
+        <label for="">check-out</label>
+        <input type="date" name="cekout" class='rounded h-10 border-2 p-2 border-slate-500'>
+        <label for="">jumlah kamar</label>
+        <input type="number" name="jumlah" class='rounded h-10 border-2 p-2 border-slate-500'>
+        <label for="">atas nama</label>
+        <input type="text" name="nama" class='rounded h-10 border-2 p-2 border-slate-500'>
+        <button name="psn" class='capitalize bg-black text-white p-2 rounded hover:bg-slate-700 transition duration-500'>buat pesanan</button>
+    </form>
+</div>

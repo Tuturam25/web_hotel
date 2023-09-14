@@ -13,26 +13,27 @@ include 'konek.php';
             window.location.href = "index.php";
         }
     </script>
+    <link rel="stylesheet" href="output.css">
 </head>
 
-<table>
-    <tr>
-        <th>Nama</th>
-        <th>Tipe Kamar</th>
-        <th>Jumlah Kamar</th>
-        <th>Check in</th>
-        <th>Check Out</th>
+<table class='print:w-full print:text-center print:border-2 print:border-collapse'>
+    <tr class='print:p-5 print:border-2 print:border-collapse'>
+        <th class='print:p-5 print:border-2 print:border-collapse'>Nama</th>
+        <th class='print:p-5 print:border-2 print:border-collapse'>Tipe Kamar</th>
+        <th class='print:p-5 print:border-2 print:border-collapse'>Jumlah Kamar</th>
+        <th class='print:p-5 print:border-2 print:border-collapse'>Check in</th>
+        <th class='print:p-5 print:border-2 print:border-collapse'>Check Out</th>
     </tr>
     <?php
     $id = $_SESSION['id'];
     $nama = $_GET['nama'];
     foreach (mysqli_query($conn, "select * from reservasi where id_user = $id and nama = '$nama'") as $res) : ?>
-        <tr>
-            <td><?= $res['nama'] ?></td>
-            <td><?= $res['tipe_kamar'] ?></td>
-            <td><?= $res['jumlah_kamar'] ?></td>
-            <td><?= $res['cek_in'] ?></td>
-            <td><?= $res['cek_out'] ?></td>
+        <tr class='print:p-5 print:border-2 print:border-collapse'>
+            <td class='print:p-5 print:border-2 print:border-collapse'><?= $res['nama'] ?></td>
+            <td class='print:p-5 print:border-2 print:border-collapse'><?= $res['tipe_kamar'] ?></td>
+            <td class='print:p-5 print:border-2 print:border-collapse'><?= $res['jumlah_kamar'] ?></td>
+            <td class='print:p-5 print:border-2 print:border-collapse'><?= $res['cek_in'] ?></td>
+            <td class='print:p-5 print:border-2 print:border-collapse'><?= $res['cek_out'] ?></td>
         </tr>
     <?php endforeach ?>
 </table>
